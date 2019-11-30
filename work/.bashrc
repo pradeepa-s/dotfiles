@@ -187,16 +187,6 @@ export CSCOPE_EDITOR=vim
 #
 # alias cd=cd_func
 # Pradeepa's aliases goes here:
-alias lrn='cd /cygdrive/f/learning/coursera/cpp_for_c'
-alias itsi='cd /cygdrive/i/my_projects/itsi/myWorkspace2'
-alias itsic='/cygdrive/e/ti/ccs901/ccs/eclipse/eclipsec.exe -noSplash -data "C:\Users\Pradeepa\workspace_v9" -application com.ti.ccstudio.apps.projectBuild -ccs.workspace -ccs.buildType clean'
-alias itsifb='/cygdrive/e/ti/ccs901/ccs/eclipse/eclipsec.exe -noSplash -data "C:\Users\Pradeepa\workspace_v9" -application com.ti.ccstudio.apps.projectBuild -ccs.workspace -ccs.buildType full'
-alias itsib='/cygdrive/e/ti/ccs901/ccs/eclipse/eclipsec.exe -noSplash -data "C:\Users\Pradeepa\workspace_v9" -application com.ti.ccstudio.apps.projectBuild -ccs.workspace'
-alias itsim='/cygdrive/e/ti/ccs901/ccs/eclipse/eclipsec.exe -noSplash -data "C:\Users\Pradeepa\workspace_v9" -application com.ti.ccstudio.apps.projectBuild -ccs.projects MAP'
-alias w~='cd /cygdrive/c/Users/Pradeepa'
-alias myl='cd /cygdrive/i/my_learnings'
-alias myp='cd /cygdrive/i/my_projects/'
-alias mypi='cd /cygdrive/i/my_projects/itsi'
 alias tmux='tmux -2'
 alias foo=fe
 alias gs='git status -uno'
@@ -239,3 +229,33 @@ vg() {
      vim $file +$line
   fi
 }
+
+
+PATH=~/bin:$PATH
+# RESMED aliases goes here:
+alias git='/cygdrive/c/Program\ Files/Git/mingw64/bin/git'
+alias ss='wscons -uj8'
+alias fg1='cd /home/pradeepas/fgrepo/1/fgapplication'
+alias fg2='cd /home/pradeepas/fgrepo/2/fgapplication'
+alias fg3='cd /home/pradeepas/fgrepo/3/fgapplication'
+alias fgm='cd /home/pradeepas/fgrepo/master/fgapplication'
+alias fgf='cd /home/pradeepas/fgrepo/figshell/Figshell'
+alias w32='cd Test/Scenarios/Win32'
+alias target='cd Test/Scenarios/Target'
+alias gsu='git submodule update'
+alias gsr='git submodule update --init --recursive'
+alias fgclone='git clone http://bitbucket.corp.resmed.org/scm/pac/fgapplication.git'
+alias fgs='git pull && gsr && cd Test/Scenarios/Win32 && ss && cd ../Target && ss && cd ../../Unit/SuperUnit/Win32 && ss && ./Unit_NoRegion_SupersetAlert.exe'
+alias fgmsetup='mkdir -p /home/pradeepas/fgrepo/master && cd /home/pradeepas/fgrepo/master && fgclone && fgm && fgs && fgm'
+alias fg1setup='mkdir -p /home/pradeepas/fgrepo/1 && cd /home/pradeepas/fgrepo/1 && fgclone && fg1 && fgs && fgm'
+alias fg2setup='mkdir -p /home/pradeepas/fgrepo/2 && cd /home/pradeepas/fgrepo/2 && fgclone && fg2 && fgs && fgm'
+alias fg3setup='mkdir -p /home/pradeepas/fgrepo/3 && cd /home/pradeepas/fgrepo/3 && fgclone && fg3 && fgs && fgm'
+alias fgfsetup='mkdir -p /home/pradeepas/fgrepo/figshell && cd /home/pradeepas/fgrepo/figshell && git clone http://bitbucket.corp.resmed.org/scm/ssw/figshell.git'
+alias fgsetup='fgmsetup && fg1setup && fg2setup && fg3setup'
+alias fgms='fgm && fgs'
+alias fg1s='fg1 && fgs'
+alias fg2s='fg2 && fgs'
+alias fg3s='fg3 && fgs'
+alias fgas='fgms && fg1s && fg2s && fg3s'
+alias fgtt='python fgtest.py -t -J ~/Hw.py -s '
+alias fgt='python fgtest.py -s '
