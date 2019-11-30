@@ -1,0 +1,4 @@
+BoldAsFont=yes
+Term=xterm-256color
+BoldAsColour=yes
+BellType=0
