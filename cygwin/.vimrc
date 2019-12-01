@@ -25,10 +25,10 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'sjl/badwolf'
-Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'nixprime/cpsm'
 Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ervandew/supertab'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,13 +51,13 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 "search for text
-nmap <F3>1 :silent grep! <C-R><C-W> --c<CR>:redr!<CR>:copen<CR>
-nmap <F3>2 :silent grep! <C-R><C-W> --cpp<CR>:redr!<CR>:copen<CR>
-nmap <F3>u2 :silent grep! <C-R><C-W> --cpp -U<CR>:redr!<CR>:copen<CR>
-nmap <F3>3 :silent grep! <C-R><C-W> --python<CR>:redr!<CR>:copen<CR>
-nmap <F3>4 :silent grep! <C-R><C-W> *<CR>:redr!<CR>:copen<CR>
-nmap <F3>0 :silent grep! <C-R><C-W>
-nmap <F3>pf :silent grep! "def <C-R><C-W>" --python<CR>:redr!<CR>:copen<CR>
+nmap <F3>1 :silent Ag <C-R><C-W> --cc<CR>:redr!<CR>:copen<CR>
+nmap <F3>2 :silent Ag <C-R><C-W> --cpp<CR>:redr!<CR>:copen<CR>
+nmap <F3>u2 :silent Ag <C-R><C-W> --cpp -U<CR>:redr!<CR>:copen<CR>
+nmap <F3>3 :silent Ag <C-R><C-W> --python<CR>:redr!<CR>:copen<CR>
+nmap <F3>4 :silent Ag <C-R><C-W> *<CR>:redr!<CR>:copen<CR>
+nmap <F3>0 :silent Ag <C-R><C-W>
+nmap <F3>pf :silent Ag "def <C-R><C-W>" --python<CR>:redr!<CR>:copen<CR>
 nmap <F8> :TagbarToggle<CR>
 
 nmap <space> za
@@ -72,8 +72,8 @@ nmap <leader>s :source ~/.vimrc<CR>
 nmap ,jt <ESC>ggi======================<CR>
 			\ISSUE<CR>======================<CR><ESC>kk0llll
 
-nmap <TAB><TAB> :tabnew<CR>
-nmap <TAB>l :tablast<CR>
+nmap <leader>t :tabnew<CR>
+nmap <leader>l :tablast<CR>
 
 set tabstop=4
 set shiftwidth=4
@@ -143,10 +143,6 @@ else
 endif
 
 set incsearch
-
-"Flag whitespaces
-highlight BadWhitespace ctermbg=darkgreen guibg=lightgreen
-au BufRead,BufNewFile *.cpp,*.hpp,*.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
