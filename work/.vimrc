@@ -27,6 +27,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'sjl/badwolf'
 Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ervandew/supertab'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
