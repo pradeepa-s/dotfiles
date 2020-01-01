@@ -25,7 +25,8 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'sjl/badwolf'
-Plugin 'JazzCore/ctrlp-cmatcher'
+" Only in Ubuntu: Plugin 'nixprime/cpsm'
+" For cygwin: Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'ervandew/supertab'
@@ -60,7 +61,6 @@ nmap <F3>0 :silent Ag <C-R><C-W>
 nmap <F3>pf :silent Ag "def <C-R><C-W>" --python<CR>:redr!<CR>:copen<CR>
 nmap <F8> :TagbarToggle<CR>
 
-nmap <space> za
 nmap <leader>o :copen<CR>
 nmap <leader>c :cclose<CR>
 nmap <leader>r :redraw!<CR>
@@ -69,78 +69,23 @@ nmap <leader>fr :%s/<C-R><C-W>//gc<LEFT><LEFT><LEFT>
 nmap <leader>b :ls<CR>:b 
 nmap <leader>id :r !date<CR>
 nmap <leader>s :source ~/.vimrc<CR>
-nmap ,jt <ESC>ggi======================<CR>
-			\ISSUE<CR>======================<CR><ESC>kk0llll
 
 nmap <leader>t :tabnew<CR>
 nmap <leader>l :tablast<CR>
 
 set tabstop=4
 set shiftwidth=4
-set textwidth=200
+set softtabstop=4
+set textwidth=100
+set expandtab
+set autoindent
 
-"python PEP8 indentation
 au WinEnter,BufNewFile,BufRead *.py
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-	\ nmap pdb A<CR>import pdb; pdb.set_trace()|
-    \ colorscheme gruvbox |
-	\ nmap <leader>g I// <ESC>
-
-au WinEnter,BufNewFile,BufRead *.cpp
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-    \ colorscheme afterglow |
-	\ nmap <leader>g I// <ESC>
-
-au WinEnter,BufNewFile,BufRead *.hpp
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-    \ colorscheme afterglow |
-	\ nmap <leader>g I// <ESC>
-
-au WinEnter,BufNewFile,BufRead *.c
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-	\ set fileformat=dos |
-    \ colorscheme afterglow |
-	\ nmap <leader>g I// <ESC>
-
-au WinEnter,BufNewFile,BufRead *.h
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-	\ set fileformat=dos |
-    \ colorscheme afterglow |
-	\ nmap <leader>g I// <ESC>
+	\ nmap pdb A<CR>import pdb; pdb.set_trace()
 
 set clipboard=unnamed
 
-if has('gui_running')
-  set background=dark
-  colorscheme solarized
-else
-  colorscheme afterglow
-endif
+colorscheme afterglow
 
 set incsearch
 
@@ -149,7 +94,6 @@ let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
-set incsearch
 set cursorline
 hi CursorLine term=bold cterm=bold
 
