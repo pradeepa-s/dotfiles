@@ -28,8 +28,9 @@ Plugin 'sjl/badwolf'
 " Only in Ubuntu: Plugin 'nixprime/cpsm'
 " For cygwin: Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
-Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'ervandew/supertab'
+Plugin 'soramugi/auto-ctags.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -37,13 +38,24 @@ filetype plugin indent on    " required
 
 let python_highlight_all=1
 
+colorscheme afterglow
 set relativenumber
 set number
 set syntax=on
 set cindent
-
+set textwidth=100
+set clipboard=unnamed
+set incsearch
+set cursorline
+hi CursorLine term=bold cterm=bold
+set colorcolumn=+1
 set foldmethod=indent
 set foldlevel=99
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set autoindent
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -73,29 +85,14 @@ nmap <leader>s :source ~/.vimrc<CR>
 nmap <leader>t :tabnew<CR>
 nmap <leader>l :tablast<CR>
 
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set textwidth=100
-set expandtab
-set autoindent
-
 au WinEnter,BufNewFile,BufRead *.py
 	\ nmap pdb A<CR>import pdb; pdb.set_trace()
-
-set clipboard=unnamed
-
-colorscheme afterglow
-
-set incsearch
 
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
-set cursorline
-hi CursorLine term=bold cterm=bold
 
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
@@ -103,3 +100,4 @@ if executable('ag')
 endif
 
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+let g:better_whitespace_enabled=1
