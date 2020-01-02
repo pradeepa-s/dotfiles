@@ -25,6 +25,8 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'sjl/badwolf'
+Plugin 'lyuts/vim-rtags'
+Plugin 'tomtom/tcomment_vim'
 " Only in Ubuntu: Plugin 'nixprime/cpsm'
 " For cygwin: Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
