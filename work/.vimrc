@@ -25,10 +25,13 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'sjl/badwolf'
+Plugin 'lyuts/vim-rtags'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
-Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'ervandew/supertab'
+Plugin 'soramugi/auto-ctags.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -36,13 +39,24 @@ filetype plugin indent on    " required
 
 let python_highlight_all=1
 
+colorscheme afterglow
 set relativenumber
 set number
 set syntax=on
 set cindent
-
+set textwidth=100
+set clipboard=unnamed
+set incsearch
+set cursorline
+hi CursorLine term=bold cterm=bold
+set colorcolumn=+1
 set foldmethod=indent
 set foldlevel=99
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set autoindent
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -60,7 +74,6 @@ nmap <F3>0 :silent Ag <C-R><C-W>
 nmap <F3>pf :silent Ag "def <C-R><C-W>" --python<CR>:redr!<CR>:copen<CR>
 nmap <F8> :TagbarToggle<CR>
 
-nmap <space> za
 nmap <leader>o :copen<CR>
 nmap <leader>c :cclose<CR>
 nmap <leader>r :redraw!<CR>
@@ -69,89 +82,18 @@ nmap <leader>fr :%s/<C-R><C-W>//gc<LEFT><LEFT><LEFT>
 nmap <leader>b :ls<CR>:b 
 nmap <leader>id :r !date<CR>
 nmap <leader>s :source ~/.vimrc<CR>
-nmap ,jt <ESC>ggi======================<CR>
-			\ISSUE<CR>======================<CR><ESC>kk0llll
 
 nmap <leader>t :tabnew<CR>
 nmap <leader>l :tablast<CR>
 
-set tabstop=4
-set shiftwidth=4
-set textwidth=200
-
-"python PEP8 indentation
 au WinEnter,BufNewFile,BufRead *.py
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-	\ nmap pdb A<CR>import pdb; pdb.set_trace()|
-    \ colorscheme gruvbox |
-	\ nmap <leader>g I// <ESC>
-
-au WinEnter,BufNewFile,BufRead *.cpp
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-    \ colorscheme afterglow |
-	\ nmap <leader>g I// <ESC>
-
-au WinEnter,BufNewFile,BufRead *.hpp
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-    \ colorscheme afterglow |
-	\ nmap <leader>g I// <ESC>
-
-au WinEnter,BufNewFile,BufRead *.c
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-	\ set fileformat=dos |
-    \ colorscheme afterglow |
-	\ nmap <leader>g I// <ESC>
-
-au WinEnter,BufNewFile,BufRead *.h
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=150 |
-	\ set expandtab |
-	\ set autoindent |
-	\ set fileformat=dos |
-    \ colorscheme afterglow |
-	\ nmap <leader>g I// <ESC>
-
-set clipboard=unnamed
-
-if has('gui_running')
-  set background=dark
-  colorscheme solarized
-else
-  colorscheme afterglow
-endif
-
-set incsearch
+	\ nmap pdb A<CR>import pdb; pdb.set_trace()
 
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
-set incsearch
-set cursorline
-hi CursorLine term=bold cterm=bold
 
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
@@ -159,3 +101,4 @@ if executable('ag')
 endif
 
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+let g:better_whitespace_enabled=1
