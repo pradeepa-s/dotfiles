@@ -1,6 +1,7 @@
 set nocompatible              " required
 filetype off                  " required
 
+autocmd BufNewFile,BufRead Engineering.py let b:tagbar_ignore = 1
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -18,7 +19,6 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -27,8 +27,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'sjl/badwolf'
 Plugin 'lyuts/vim-rtags'
 Plugin 'tomtom/tcomment_vim'
-" Only in Ubuntu: Plugin 'nixprime/cpsm'
-Plugin 'JazzCore/ctrlp-cmatcher'   " uncomment for Cygwin
+Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'ervandew/supertab'
