@@ -28,12 +28,13 @@ Plugin 'sjl/badwolf'
 Plugin 'lyuts/vim-rtags'
 Plugin 'tomtom/tcomment_vim'
 " Only in Ubuntu: Plugin 'nixprime/cpsm'
-" For cygwin: Plugin 'JazzCore/ctrlp-cmatcher'
+Plugin 'JazzCore/ctrlp-cmatcher'   " uncomment for Cygwin
 Plugin 'rking/ag.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'ervandew/supertab'
 Plugin 'soramugi/auto-ctags.vim'
 Plugin 'joshukraine/dragvisuals'
+Plugin 'machakann/vim-sandwich'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -87,6 +88,13 @@ nmap <leader>s :source ~/.vimrc<CR>
 
 nmap <leader>t :tabnew<CR>
 nmap <leader>l :tablast<CR>
+
+runtime bundle/dragvisuals/plugins/dragvisuals.vim
+vmap  <expr> <C-h> DVB_Drag('left')
+vmap  <expr> <C-l> DVB_Drag('right')
+vmap  <expr> <C-j> DVB_Drag('down')
+vmap  <expr> <C-k> DVB_Drag('up')
+let g:DVB_TrimWS = 1
 
 au WinEnter,BufNewFile,BufRead *.py
 	\ nmap pdb A<CR>import pdb; pdb.set_trace()
