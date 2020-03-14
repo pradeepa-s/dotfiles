@@ -45,7 +45,6 @@ let python_highlight_all=1
 colorscheme afterglow
 set relativenumber
 set number
-set syntax=on
 set cindent
 set textwidth=100
 set clipboard=unnamed
@@ -60,6 +59,7 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set autoindent
+syntax on
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
