@@ -2,12 +2,12 @@
 "
 " <leader>rtt = Run current test in win32 (BDD and unit test)
 " <leader>rtl = Run last test (This runs the test you executed last)
-" <leader>rtp = Run current parameterised test on win32 (parameter will be requested from the user)
-" <leader>rdp = Run current parameterised test on target
+" <leader>rtp = Run current parameterised test (parameter will be requested from the user)
+" <leader>rtd = Run current test on device (BDD)
+" <leader>rtb = Run current test on win32 in debug mode (BDD)
+" <leader>rdb = Run current test on device in debug mode (BDD)
 " <leader>rtd = Run current test on device (BDD)
 " <leader>rtf = Run current test file in win32 (BDD and unit test)
-" <leader>rbw = Build Win32
-" <leader>rbt = Build Target
 " <leader>rsc = Run style check
 " <leader>rk  = Keep this terminal open(Plugin will not close this terminal)
 " <leader>rc  = Close all open terminals
@@ -15,137 +15,6 @@
 
 " Please point to the farm config file
 let g:farm_config = "/home/pradeepas/Hw.py"
-
-" Repetitive tasks
-" ================
-"
-"      1. It's annoying that I have to copy the test name, paste it in a shell, run, check results, if
-"      it fails go back edit the file do the same thing over and over again.
-"      2. It's annoying that I have to leave the editor and go to the shell to build the project and
-"      if there are errors come back fix them, repeat.
-"      3. It's annoying that when running unit tests I need to copy the name, REMEMBER to go to unit
-"      test folder, type in the unit test filter, run the test and if it fails come back, fix the
-"      issue, repeat.
-"
-" What this script does?
-" ======================
-"
-"     1. Runs BDD test (win32, target and parameterized)
-"     2. Runs unit tests (google test and unittest++)
-"     3. Builds project (win32 and target)
-"     4. Runs style check
-"
-" How to use it?
-" ==============
-"
-"     Following are the default key mappings: (Modify as it pleases you)
-"
-"         <leader>rtt = Run current test in win32 (BDD and unit test)
-"         <leader>rtl = Run last test (This runs the test you executed last)
-"         <leader>rtp = Run current parameterised test on win32 (parameter will be requested from the user)
-"         <leader>rdp = Run current parameterised test on target
-"         <leader>rtd = Run current test on device (BDD)
-"         <leader>rtf = Run current test file in win32 (BDD and unit test)
-"         <leader>rbw = Build Win32
-"         <leader>rbt = Build Target
-"         <leader>rsc = Run style check
-"         <leader>rk  = Keep this terminal open(Plugin will not close this terminal)
-"     <leader>rc  = Close all open terminals
-"
-" How to set it up?
-" =================
-"
-"     Add the following line to your vim config.
-"         source <the script path>
-"     Modify the g:farm_config to point to the full path of your FarmConfig.py
-"
-" Limitations
-" ===========
-"
-"     Assumes that vim working directory is fgapplication
-"
-" Use cases currently handled:
-" ============================
-"
-" Use case 1:
-"     You are developing a BDD test and you want to run it in Win32
-"
-"     You can type <leader>rtt to run that test (RTT = Resmed This Test).
-"     This basically runs the test which is at or above your cursor line.
-"     Script automatically identifies the test type and runs that particular test in a separate terminal (as a horizontal split).
-"     At the moment, it can identify BDD, GoogleTest, UnitTest++.
-"     Cursor position will not change so you can simply continue your work while test runs parallaly.
-"     If you run this multiple times, it will clean up the stale windows for you.
-"
-" Use case 2:
-"     You are developing a unit test using GTest or UnitTest++.
-"
-"     You can type <leader>rtt, same as BDD test.
-"     Script will determine which type of test you are writing based on header files and run that
-"     fixture (GTEST) or suite (UNITTEST++) which is at or above your cursor.
-"     It builds the project before running the test, so you don't have to do that.
-"     If you run this multiple times, it will clean up the stale windows for you.
-"
-" Use case 3:
-"     You only need to run the 0th parameterised BDD test.
-"
-"     Keep the cursor in the test and type <leader>rtp to run a specific parameter (RTP = Resmed Test Parameterized)
-"     Once you execute this, it will ask from the user to enter the parameter (Ex: 0, 1, ...)
-"     It simply runs that same as other cases.
-"
-" Use case 4:
-"     You found an error in one of the tests.
-"     Now you are no longer editing the test steps, but you are changing some other function. A python
-"     infrastructure function or some cpp file.
-"
-"     You can type <leader>rtl to run the last test (RTL = Resmed Test Last).
-"     This runs the last executed test in a new terminal (horizontal split).
-"     This will close last terminal so you wouldn't end up having stale jobs in your workspace.
-"
-" Use case 5:
-"     You are developing a BDD test and you want to run it on target.
-"
-"     You can type <leader>rtd to run the the test on device (RTD = Resmed Test Device)
-"
-"     *** This assumes that you've built the project and runs that BDD test on target
-"
-" Use case 6:
-"     You need to run a parameterized BDD test on target
-"
-"     You can type <leader>rdp to run the the test on device (RDP = Resmed Device Paramterized)
-"
-"     *** This assumes that you've built the project and runs that BDD test on target
-"
-" Use case 7:
-"     You don't want to keep the last finished terminal when running the next job
-"
-"     Go to the terminal you want to keep and type <leader>rk (RK = Resmed Keep)
-"     Next time you run a test it wouldn't kill the terminal you marked
-"
-" Use case 8:
-"     You want to close the opened terminals (except the ones you wanted to keep)
-"
-"     Type <leader>rc (RC = Resmed Clear)
-"     This closes the terminals the script opened for you
-"
-" Use case 9:
-"     I want to build for win32
-"
-"     Type <leader>rbw (RBW = Resmed Build Win32)
-"
-" Use case 10:
-"     I want to build for target
-"
-"     Type <leader>rbt (RBT = Resmed Build Targe)
-"
-" Future
-" ======
-"
-" <leader>rcc = Create CPP class and test files
-" <leader>rot = Open unit test file for current class
-
-
-
 
 let s:terminals = []
 
@@ -236,6 +105,9 @@ function! s:RunThisBddTest(platform, param)
     if a:param == 1
         let user_param = input('Enter parameter: ')
         let s:last_test = s:last_test.":".user_param
+    elseif a:param == 2
+        let test_type = s:last_test_type."_DEBUG"
+        let s:last_test_type = test_type
     endif
 
     call RunTest()
@@ -277,13 +149,19 @@ function! RunTest()
         let term_no = term_start(['python', 'fgtest.py', '-s', s:last_test], {'cwd': bdd_directory})
         call add(s:terminals, term_no)
     elseif s:last_test_type == "BDD_TARGET_TEST"
-        let term_no = term_start(['python', 'fgtest.py', '-t', '-J' , g:farm_config, '-s', s:last_test], {'cwd': bdd_directory})
+        let term_no = term_start(['python', 'fgtest.py', '-t', '-s', s:last_test], {'cwd': bdd_directory})
+        call add(s:terminals, term_no)
+    elseif s:last_test_type == "BDD_WIN32_TEST_DEBUG"
+        let term_no = term_start(['python', 'fgtest.py', '-d', '-s', s:last_test], {'cwd': bdd_directory})
+        call add(s:terminals, term_no)
+    elseif s:last_test_type == "BDD_TARGET_TEST_DEBUG"
+        let term_no = term_start(['python', 'fgtest.py', '-K',  '-t', '-s', s:last_test], {'cwd': bdd_directory})
         call add(s:terminals, term_no)
     elseif s:last_test_type == "GUNIT_FIXTURE"
-        let term_no = term_start(['scons', '-uj8'], {'cwd': unit_directory, 'exit_cb': function("s:RunThisGUnitTest", [unit_directory, s:last_test])})
+        let term_no = term_start(['wscons', '-uj8'], {'cwd': unit_directory, 'exit_cb': function("s:RunThisGUnitTest", [unit_directory, s:last_test])})
         call add(s:terminals, term_no)
     elseif s:last_test_type == "UNITPP_SUITE"
-        let term_no = term_start(['scons', '-uj8'], {'cwd': unit_directory, 'exit_cb': function("s:RunThisUnitTestPPTest", [unit_directory, s:last_test])})
+        let term_no = term_start(['wscons', '-uj8'], {'cwd': unit_directory, 'exit_cb': function("s:RunThisUnitTestPPTest", [unit_directory, s:last_test])})
         call add(s:terminals, term_no)
     elseif s:last_test_type == "BDD_WIN32_TEST_FILE"
         let term_no = term_start(['python', 'fgtest.py', s:last_test], {'cwd': bdd_directory})
@@ -291,6 +169,7 @@ function! RunTest()
     else
         echoerr "Previous test not detected"
     endif
+
 
     wincmd p
 endfunction
@@ -344,7 +223,7 @@ function! Build(platform)
         echoerr "Invalid platform"
     endif
 
-    let term_no = term_start(['scons', '-uj8'], {'cwd': directory})
+    let term_no = term_start(['wscons', '-uj8'], {'cwd': directory})
     call add(s:terminals, term_no)
     wincmd p
 endfunction
@@ -354,6 +233,8 @@ nnoremap <leader>rtt :call RunThisTest("win32", 0)<CR>
 nnoremap <leader>rtd :call RunThisTest("target", 0)<CR>
 nnoremap <leader>rtp :call RunThisTest("win32", 1)<CR>
 nnoremap <leader>rdp :call RunThisTest("target", 1)<CR>
+nnoremap <leader>rtb :call RunThisTest("win32", 2)<CR>
+nnoremap <leader>rdb :call RunThisTest("target", 2)<CR>
 nnoremap <leader>rtf :call RunThisTestFile()<CR>
 nnoremap <leader>rtl :call RunTest()<CR>
 nnoremap <leader>rsc :call RunStyleCheck()<CR>

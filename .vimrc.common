@@ -1,6 +1,7 @@
 set nocompatible              " required
 filetype off                  " required
 
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -42,9 +43,10 @@ filetype plugin indent on    " required
 
 let python_highlight_all=1
 
-colorscheme afterglow
+colorscheme OceanicNext
 set relativenumber
 set number
+syntax on
 set cindent
 set textwidth=100
 set clipboard=unnamed
@@ -59,7 +61,6 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set autoindent
-syntax on
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -77,7 +78,7 @@ nmap <F3>0 :silent Ag <C-R><C-W>
 nmap <F3>pf :silent Ag "def <C-R><C-W>" --python<CR>:redr!<CR>:copen<CR>
 nmap <F8> :TagbarToggle<CR>
 
-nmap <leader>o :copen<CR>
+nmap <leader>o :bo copen<CR>
 nmap <leader>c :cclose<CR>
 nmap <leader>r :redraw!<CR>
 nmap <leader>f :FZF<CR>
@@ -87,7 +88,8 @@ nmap <leader>id :r !date<CR>
 nmap <leader>s :source ~/.vimrc<CR>
 
 nmap <leader>t :tabnew<CR>
-nmap <leader>l :tablast<CR>
+nnoremap <leader>iu yypVr=o<ESC>o
+nmap <leader>id :r !date<CR>
 
 runtime bundle/dragvisuals/plugins/dragvisuals.vim
 vmap  <expr> <C-h> DVB_Drag('left')
@@ -112,3 +114,7 @@ endif
 
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 let g:better_whitespace_enabled=1
+
+
+
+
