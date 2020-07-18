@@ -1,0 +1,13 @@
+call plug#begin('~/AppData/Local/nvim/plugged')
+" below are some vim plugin for demonstration purpose
+Plug 'rafi/awesome-vim-colorschemes'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'tpope/vim-fugitive'
+Plug 'ervandew/supertab'
+call plug#end()
+
+nmap <leader>s :source ~\AppData\Local\nvim\init.vim<CR>

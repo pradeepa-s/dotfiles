@@ -1,0 +1,41 @@
+set nocompatible              " required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" add all your plugins here (note older versions of Vundle
+" used Bundle instead of Plugin)
+
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'rafi/awesome-vim-colorschemes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'sjl/badwolf'
+Plugin 'lyuts/vim-rtags'
+Plugin 'tomtom/tcomment_vim'
+" Only in Ubuntu: Plugin 'nixprime/cpsm'
+Plugin 'JazzCore/ctrlp-cmatcher'   " uncomment for Cygwin
+Plugin 'rking/ag.vim'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'ervandew/supertab'
+Plugin 'soramugi/auto-ctags.vim'
+Plugin 'joshukraine/dragvisuals'
+Plugin 'machakann/vim-sandwich'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
