@@ -1,3 +1,2 @@
 autocmd BufNewFile,BufRead Engineering.py let b:tagbar_ignore = 1
-source ~/dotfiles/resmed.vim
-let g:fugitive_git_executable='/home/pradeepas/bin/git'
+source /cygdrive/c/src/dotfiles/resmed.vim

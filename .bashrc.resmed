@@ -1,16 +1,19 @@
 # RESMED aliases goes here:
 PATH=~/bin:$PATH
+REPO_ROOT='/cygdrive/c/src'
+DOTFILES_ROOT='/cygdrive/c/src/dotfiles'
 alias fgclone='git clone http://bitbucket.corp.resmed.org/scm/pac/fgapplication.git'
 
-alias git='/cygdrive/c/Program\ Files/Git/mingw64/bin/git'
+alias scons='wscons'
 alias ss='wscons -uj8'
-alias fg1='cd ~/fgrepo/1/fgapplication/'
-alias fg2='cd ~/fgrepo/2/fgapplication/'
-alias fg3='cd ~/fgrepo/3/fgapplication/'
-alias cal='cd /cygdrive/d/caml/caml/'
-alias fgm='cd /home/pradeepas/fgrepo/master/fgapplication'
-alias fgf='cd ~/fgrepo/figshell/figshell/'
+alias fg1='cd $REPO_ROOT/1/fgapplication/'
+alias fg2='cd $REPO_ROOT/2/fgapplication/'
+alias fg3='cd $REPO_ROOT/3/fgapplication/'
+# alias cal='cd /cygdrive/d/caml/caml/'
+alias cal='cd $REPO_ROOT/caml/'
+alias fgf='cd $REPO_ROOT/figshell/figshell/'
 alias w32='cd Test/Scenarios/Win32'
+alias scen='cd Test/Scenarios'
 alias target='cd Test/Scenarios/Target'
 
 alias fgtt='python fgtest.py -t -J ~/Hw.py -s '
@@ -18,10 +21,11 @@ alias fgt='python fgtest.py -s '
 alias bfgt='cd Win32 && ss && cd .. && fgt'
 alias bfgtt='cd Target && ss && cd .. && fgtt'
 
-alias fig='python ~/fgrepo/figshell/figshell/FigShell/Main.py g -port /dev/ttyS2'
-alias figc='python ~/fgrepo/figshell/figshell/FigShell/Main.py g -port /dev/ttyS2 Extensions/CAMLHwMonitor.py'
-alias ufig='python ~/fgrepo/figshell/figshell/FigShell/Main.py g -port'
-alias stlink='/cygdrive/c/Program\ Files\ \(x86\)/STMicroelectronics/STM32\ ST-LINK\ Utility/ST-LINK\ Utility/ST-LINK_CLI.exe'
+alias fig='python $REPO_ROOT/figshell/figshell/FigShell/Main.py g -port /dev/ttyS2'
+alias figc='python $REPO_ROOT/figshell/figshell/FigShell/Main.py g -port /dev/ttyS2 Extensions.CAMLHwMonitor.py'
+alias ufig='python $REPO_ROOT/figshell/figshell/FigShell/Main.py g -port'
 alias stlinkp='stlink -ME -p NoRegion_SupersetAlert_CombinedWithBootloader.srec -Rst'
 
-alias camb='~/dotfiles/cam_build.sh'
+alias camb='$DOTFILES_ROOT/cam_build.sh'
+
+alias tag1='ctags --languages=Python,C,C++ -R Application/ Test/

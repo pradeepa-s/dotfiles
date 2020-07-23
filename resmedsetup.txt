@@ -1,0 +1,8 @@
+Change .bashrc
+Change .vimrc
+Clone vundle
+Setup cygwin git
+	mkdir ~/bin
+	symlink git -> windowsw git
+    symlink stlink
+    create wscons script
