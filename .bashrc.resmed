@@ -6,6 +6,7 @@ alias fgclone='git clone http://bitbucket.corp.resmed.org/scm/pac/fgapplication.
 
 alias scons='wscons'
 alias ss='wscons -uj8'
+alias src='cd $REPO_ROOT'
 alias fg1='cd $REPO_ROOT/1/fgapplication/'
 alias fg2='cd $REPO_ROOT/2/fgapplication/'
 alias fg3='cd $REPO_ROOT/3/fgapplication/'
@@ -21,11 +22,37 @@ alias fgt='python fgtest.py -s '
 alias bfgt='cd Win32 && ss && cd .. && fgt'
 alias bfgtt='cd Target && ss && cd .. && fgtt'
 
-alias fig='python $REPO_ROOT/figshell/figshell/FigShell/Main.py g -port /dev/ttyS2'
-alias figc='python $REPO_ROOT/figshell/figshell/FigShell/Main.py g -port /dev/ttyS2 Extensions.CAMLHwMonitor.py'
-alias ufig='python $REPO_ROOT/figshell/figshell/FigShell/Main.py g -port'
+alias fig='python $REPO_ROOT/figshell/FigShell/Main.py g -port /dev/ttyS5'
+alias figc='python $REPO_ROOT/figshell/FigShell/Main.py g -port /dev/ttyS2 Extensions.CAMLHwMonitor.py'
+alias ufig='python $REPO_ROOT/figshell/FigShell/Main.py g -port'
+alias stlink='/cygdrive/c/Program\ Files\ \(x86\)/STMicroelectronics/STM32\ ST-LINK\ Utility/ST-LINK\ Utility/ST-LINK_CLI.exe'
 alias stlinkp='stlink -ME -p NoRegion_SupersetAlert_CombinedWithBootloader.srec -Rst'
+alias commander='/cygdrive/c/SiliconLabs/SimplicityStudio/v4/developer/adapter_packs/commander/commander.exe'
 
+alias tag1='ctags --languages=Python,C,C++ -R Application/ Test/'
 alias camb='$DOTFILES_ROOT/cam_build.sh'
 
-alias tag1='ctags --languages=Python,C,C++ -R Application/ Test/
+# Build target
+buildt() {
+    pushd .
+    target
+    ss
+    popd
+}
+
+# Build win32
+buildw() {
+    pushd .
+    w32
+    ss
+    popd
+}
+
+# Flash the firmware
+prog() {
+    pushd .
+    target
+    stlinkp
+    popd
+}
+

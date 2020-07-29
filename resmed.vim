@@ -229,16 +229,17 @@ function! Build(platform)
 endfunction
 
 
-nnoremap <leader>rtt :call RunThisTest("win32", 0)<CR>
-nnoremap <leader>rtd :call RunThisTest("target", 0)<CR>
-nnoremap <leader>rtp :call RunThisTest("win32", 1)<CR>
-nnoremap <leader>rdp :call RunThisTest("target", 1)<CR>
-nnoremap <leader>rtb :call RunThisTest("win32", 2)<CR>
-nnoremap <leader>rdb :call RunThisTest("target", 2)<CR>
-nnoremap <leader>rtf :call RunThisTestFile()<CR>
-nnoremap <leader>rtl :call RunTest()<CR>
-nnoremap <leader>rsc :call RunStyleCheck()<CR>
-nnoremap <leader>rbw :call Build("win32")<CR>
-nnoremap <leader>rbt :call Build("target")<CR>
-nnoremap <leader>rk :call KeepThisTerminal()<CR>
-nnoremap <leader>rc :call CloseOpenedTerminals()<CR>
+nnoremap <unique> <leader>rtt :call RunThisTest("win32", 0)<CR>
+nnoremap <unique> <leader>rtd :call RunThisTest("target", 0)<CR>
+nnoremap <unique> <leader>rtp :call RunThisTest("win32", 1)<CR>
+nnoremap <unique> <leader>rdp :call RunThisTest("target", 1)<CR>
+nnoremap <unique> <leader>rtb :call RunThisTest("win32", 2)<CR>
+nnoremap <unique> <leader>rdb :call RunThisTest("target", 2)<CR>
+nnoremap <unique> <leader>rtf :call RunThisTestFile()<CR>
+nnoremap <unique> <leader>rtl :call RunTest()<CR>
+nnoremap <unique> <leader>rsc :call RunStyleCheck()<CR>
+nnoremap <unique> <leader>rbw :call Build("win32")<CR>
+nnoremap <unique> <leader>rbt :call Build("target")<CR>
+nnoremap <unique> <leader>rk :call KeepThisTerminal()<CR>
+nunmap <leader>rc
+nnoremap <unique> <leader>rc :call CloseOpenedTerminals()<CR>

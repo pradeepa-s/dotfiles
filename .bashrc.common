@@ -9,7 +9,9 @@ alias gpul='git pull'
 alias gpus='git push'
 alias gcm='git commit -m '
 alias gsu='git submodule update'
+alias gsi='git submodule update --init'
 alias gsr='git submodule update --init --recursive'
+alias dots='cd /cygdrive/c/src/dotfiles/'
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
