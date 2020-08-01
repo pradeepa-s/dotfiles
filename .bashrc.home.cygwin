@@ -1,4 +1,3 @@
-# Pradeepa's aliases goes here:
 alias lrn='cd /cygdrive/f/learning/coursera/cpp_for_c'
 alias itsi='cd /cygdrive/i/my_projects/itsi/myWorkspace2'
 alias itsic='/cygdrive/e/ti/ccs901/ccs/eclipse/eclipsec.exe -noSplash -data "C:\Users\Pradeepa\workspace_v9" -application com.ti.ccstudio.apps.projectBuild -ccs.workspace -ccs.buildType clean'
@@ -9,3 +8,4 @@ alias w~='cd /cygdrive/c/Users/Pradeepa'
 alias myl='cd /cygdrive/i/my_learnings'
 alias myp='cd /cygdrive/i/my_projects/'
 alias mypi='cd /cygdrive/i/my_projects/itsi'
+alias dots='cd /cygdrive/i/my_projects/dotfiles/'

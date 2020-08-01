@@ -16,6 +16,7 @@ alias fgf='cd $REPO_ROOT/figshell/figshell/'
 alias w32='cd Test/Scenarios/Win32'
 alias scen='cd Test/Scenarios'
 alias target='cd Test/Scenarios/Target'
+alias dots='cd /cygdrive/c/src/dotfiles/'
 
 alias fgtt='python fgtest.py -t -J ~/Hw.py -s '
 alias fgt='python fgtest.py -s '
