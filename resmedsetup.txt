@@ -1,8 +1,11 @@
-Change .bashrc
-Change .vimrc
 Clone vundle
 Setup cygwin git
 	mkdir ~/bin
 	symlink git -> windowsw git
     symlink stlink
     create wscons script
+
+```
+#!/bin/bash
+time env PATH="/cygdrive/c/Users/pradeepas/AppData/Local/Programs/Git/cmd":/cygdrive/c/Python27 python.exe c:/Python27/Scripts/scons $*
+```
