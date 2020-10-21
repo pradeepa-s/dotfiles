@@ -43,6 +43,7 @@ nmap <leader>fr :%s/<C-R><C-W>//gc<LEFT><LEFT><LEFT>
 nmap <leader>b :ls<CR>:b 
 nmap <leader>id :r !date<CR>
 nmap <leader>s :source ~/.vimrc<CR>
+nmap <leader>p :CtrlPLine<CR>
 
 nmap <leader>t :tabnew<CR>
 nnoremap <leader>iu yypVr=o<ESC>o
@@ -56,7 +57,7 @@ vmap  <expr> <C-k> DVB_Drag('up')
 let g:DVB_TrimWS = 1
 
 au WinEnter,BufNewFile,BufRead *.py
-	\ nmap pdb A<CR>import pdb; pdb.set_trace()
+	\ nmap pdb A<CR>import pdb; pdb.set_trace()<ESC>
 
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
@@ -71,3 +72,7 @@ endif
 
 " let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 let g:better_whitespace_enabled=1
+let g:ctrlp_match_window = 'min:4,max:50'
+let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_extensions = ['buffertag', 'line', 'dir']
