@@ -4,6 +4,7 @@ export CSCOPE_EDITOR=vim
 alias tmux='tmux -2'
 alias foo=fe
 alias gs='git status -uno'
+alias gb='git rev-parse --abbrev-ref HEAD'
 alias gpul='git pull'
 alias gpus='git push'
 alias gcm='git commit -m '
@@ -46,4 +47,23 @@ vg() {
   then
      vim $file +$line
   fi
+}
+
+
+gdiff() {
+    local gstatus
+    if [ $# -eq 0 ]
+    then
+        gstatus=$(git status -s)
+        PREVIFS=$IFS
+        IFS=$'\n'
+        gstatus=$(gstatus)
+        IFS=$PREVIFS
+        echo "$gstatus"
+    fi
+
+    for arg in "$@"
+    do
+        echo "$arg"
+    done
 }
