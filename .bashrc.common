@@ -49,6 +49,9 @@ vg() {
   fi
 }
 
+gc(){
+    git checkout SFGSW-$1
+}
 
 gdiff() {
     local gstatus

@@ -5,12 +5,12 @@ set relativenumber
 set number
 syntax on
 set cindent
-set textwidth=100
+" set textwidth=100
 set clipboard=unnamed
 set incsearch
 set cursorline
 hi CursorLine term=bold cterm=bold
-set colorcolumn=+1
+set colorcolumn=110
 set foldmethod=indent
 set foldlevel=99
 set tabstop=4
@@ -26,13 +26,13 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 "search for text
-nmap <F3>1 :silent Ag <C-R><C-W> --cc<CR>:redr!<CR>:copen<CR>
-nmap <F3>2 :silent Ag <C-R><C-W> --cpp<CR>:redr!<CR>:copen<CR>
-nmap <F3>u2 :silent Ag <C-R><C-W> --cpp -U<CR>:redr!<CR>:copen<CR>
-nmap <F3>3 :silent Ag <C-R><C-W> --python<CR>:redr!<CR>:copen<CR>
+nmap <F3>1 :silent Ag <C-R><C-W> --cc
+nmap <F3>2 :silent Ag <C-R><C-W> --cpp
+nmap <F3>u2 :silent Ag <C-R><C-W> --cpp -U
+nmap <F3>3 :silent Ag <C-R><C-W> --python
 nmap <F3>4 :silent Ag <C-R><C-W> *<CR>:redr!<CR>:copen<CR>
 nmap <F3>0 :silent Ag <C-R><C-W>
-nmap <F3>pf :silent Ag "def <C-R><C-W>" --python<CR>:redr!<CR>:copen<CR>
+nmap <F3>pf :silent Ag "def <C-R><C-W>" --python
 nmap <F8> :TagbarToggle<CR>
 
 nmap <leader>o :bo copen<CR>
@@ -59,6 +59,8 @@ let g:DVB_TrimWS = 1
 au WinEnter,BufNewFile,BufRead *.py
 	\ nmap pdb A<CR>import pdb; pdb.set_trace()<ESC>
 
+autocmd FileType python setlocal colorcolumn=80
+
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
@@ -76,3 +78,4 @@ let g:ctrlp_match_window = 'min:4,max:50'
 let g:ctrlp_map = '<c-p>'
 " let g:ctrlp_cmd = 'CtrlPLastMode'
 let g:ctrlp_extensions = ['buffertag', 'line', 'dir']
+let g:ctrlp_by_filename = 1

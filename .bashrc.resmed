@@ -16,6 +16,8 @@ alias w32='cd Test/Scenarios/Win32'
 alias scen='cd Test/Scenarios'
 alias target='cd Test/Scenarios/Target'
 alias dots='cd /cygdrive/c/src/dotfiles/'
+alias temp='cd /cygdrive/c/src/temp/'
+alias jrn='cd /cygdrive/c/src/journal/my-journal/'
 
 alias fgtt='python fgtest.py -t -J ~/Hw.py -s '
 alias fgt='python fgtest.py -s '
@@ -65,4 +67,71 @@ stlinkp() {
 
 rgc() {
     git commit -m "$(git rev-parse --abbrev-ref HEAD): $1"
+}
+
+dmupd() {
+    if [ $# -eq 0 ]
+    then
+        echo "---------------------------------------------------------------------------------------------------"
+        echo "Updates CoreDataModel, VariantGeneration, MachineSpecific and TransportSpecific datamodel externals"
+        echo "---------------------------------------------------------------------------------------------------"
+        echo "Usage:"
+        echo "   dmupd <datamodel branch>"
+        echo "   Ex: dmupd feature/GDM-123"
+        return
+    fi
+
+    pushd .
+    echo "Updating CoreDataModel to $1"
+    cd External/CoreDataModel
+    git fetch
+    git clean -dfx
+    git checkout $1
+    git pull
+    popd
+
+    pushd .
+    echo "Updating VariantGeneration to $1"
+    cd External/VariantGeneration
+    git fetch
+    git clean -dfx
+    git checkout $1
+    git pull
+    popd
+
+    pushd .
+    echo "Updating MachineSpecificRestrictionsAndGrouping to $1"
+    cd External/MachineSpecificRestrictionsAndGrouping
+    git fetch
+    git clean -dfx
+    git checkout $1
+    git pull
+    popd
+
+    pushd .
+    echo "Updating TransportSpecificRestrictionsAndGrouping to $1"
+    cd External/TransportSpecificRestrictionsAndGrouping
+    git fetch
+    git clean -dfx
+    git checkout $1
+    git pull
+    popd
+}
+
+rebase(){
+    if [ $# -eq 0 ]
+    then
+        echo "------------------------"
+        echo "Rebase with given branch"
+        echo "------------------------"
+        echo "Usage:"
+        echo "   rebase <branch>"
+        echo "   Ex: rebase master"
+        return
+    fi
+    echo "Updating local repo with remote"
+    git pull
+    echo "Rebasing with $1"
+    git rebase origin/$1
+    git submodule update --init
 }

@@ -1,3 +1,4 @@
 autocmd BufNewFile,BufRead Engineering.py let b:tagbar_ignore = 1
+autocmd BufNewFile,BufRead SampleSpecfile.py let b:tagbar_ignore = 1
 autocmd BufNewFile,BufRead md.py let b:tagbar_ignore = 1
 source /cygdrive/c/src/dotfiles/resmed.vim

@@ -28,7 +28,8 @@
 " =====
 "
 " <leader>rf1 = Search for the jama spec under cursor
-" <leader>rf2 = Open jira ticket under cursor
+" <leader>rf2 = Open jira ticket for branch
+" <leader>rf3 = Open bitbucket project for branch
 "
 " Flashing Related
 " ================
@@ -56,6 +57,16 @@ let s:browser_path='/cygdrive/c/Program\ Files\ \(x86\)/Google/Chrome/Applicatio
 " jama specific
 let s:search_url='https://jama.corp.resmed.org/perspective.req\#/search?term='
 let s:project_link="&projectId=45&scope=GLOBAL"
+
+" AWS jenkins links
+let s:jenkins_url='http://fgwin32-jenkins.corp.resmed.org/'
+let s:fgapp_jenkins_url='http://fgwin32-jenkins.corp.resmed.org/job/FgApplication/job/fgapplication/job/'
+let s:fgvariants_jenkins_url='http://fgwin32-jenkins.corp.resmed.org/job/FgAppProductVariants/job/'
+let s:mergequeue_jenkins_url=s:jenkins_url . '/job/MergeQueueFgApp/'
+" JIRA links
+let s:bitbucket_url_fgapp='http://bitbucket.corp.resmed.org/projects/PAC/repos/fgapplication/browse'
+
+" BitBucket links
 
 let s:terminals = []
 
@@ -151,7 +162,7 @@ function! s:RunThisBddTest(platform, param)
         let s:last_test_type = test_type
     elseif a:param == 3
         let user_param = input('Enter fgtest params: ')
-        let s:last_test = s:last_test." ".user_param
+        let s:last_test = s:last_test.":".user_param
     endif
 
     call RunTest()
@@ -284,6 +295,38 @@ function! Build(platform)
 endfunction
 
 
+function! s:OpenInBrowser(link)
+    execute "silent !" . s:browser_path . " " . a:link
+    redraw!
+endfunction
+
+function! s:GetCurrentBranch()
+    let branch = system('git rev-parse --abbrev-ref HEAD')
+    let branch = substitute(branch, "\n", "", "g")
+    return branch
+endfunction
+
+function! OpenBitbucket()
+endfunction
+
+function! OpenJenkins(job)
+    let branch = system('git rev-parse --abbrev-ref HEAD')
+    let branch = substitute(branch, "\n", "", "g")
+
+    if a:job == "fgapp"
+        let jenkins_link = s:fgapp_jenkins_url . branch
+    elseif a:job == "fgvariants"
+        let jenkins_link = s:fgvariants_jenkins_url . branch
+    elseif a:job == "mergequeue"
+        let jenkins_link = s:mergequeue_jenkins_url
+    else
+        echoerr "Not implemented!"
+    endif
+
+    call s:OpenInBrowser(jenkins_link)
+endfunction
+
+
 function! OpenRequirements()
     let cur_pos = getpos(".")
 
@@ -303,10 +346,10 @@ function! OpenRequirements()
     for req in req_list
         if req !=? 'Internal'
             " Append requirement in the URL
-            execute "silent !" . s:browser_path . " " . s:search_url . req . s:project_link
+            let url = s:search_url . req . s:project_link
+            call s:OpenInBrowser(url)
         endif
     endfor
-    redraw!
 
     echo "Opening requirements:"
     for req in req_list
@@ -323,6 +366,7 @@ function! ResmedHelp(type)
         echo "<leader>rb? = Build"
         echo "<leader>rt? = Test"
         echo "<leader>rf? = Find"
+        echo "<leader>rj? = Jenkins"
         echo "<leader>rsc = Style check"
         echo "<leader>rk = Keep this terminal open"
         echo "<leader>rp0 = Program using st-link"
@@ -337,11 +381,20 @@ function! ResmedHelp(type)
         echo "<leader>rt7 = Ask params from user befor running current test on win32(parameter will be requested from the user)"
         echo "<leader>rt8 = Ask params from user befor running current test on target(parameter will be requested from the user)"
         echo "<leader>rt9 = Run current parameterised test (parameter will be requested from the user)"
+    elseif a:type == "jenkins"
+        echo "<leader>rjb = Open jenkins job of current branch"
+        echo "<leader>rjv = Open jenkins job for current branch in variant testing"
+        echo "<leader>rjm = Open mergequeue"
+        echo "<leader>rjt = Open jenkins job for target test master"
+        echo "<leader>rjT = Open jenkins job for target test current branch"
+        echo "<leader>rjl = Open jenkins job for long running win32 master"
+        echo "<leader>rjL = Open jenkins job for long running target master"
     endif
 endfunction
 
 nnoremap <unique> <leader>r? :call ResmedHelp("plugin")<CR>
 nnoremap <unique> <leader>rt? :call ResmedHelp("test")<CR>
+nnoremap <unique> <leader>rj? :call ResmedHelp("jenkins")<CR>
 
 nnoremap <unique> <leader>rb1 :call Build("win32")<CR>
 nnoremap <unique> <leader>rb2 :call Build("target")<CR>
@@ -353,9 +406,17 @@ nnoremap <unique> <leader>rt3 :call RunThisTest("win32", 2)<CR>
 nnoremap <unique> <leader>rt4 :call RunThisTest("target", 2)<CR>
 nnoremap <unique> <leader>rt5 :call RunThisTestFile()<CR>
 nnoremap <unique> <leader>rt7 :call RunThisTest("win32", 1)<CR>
-nnoremap <unique> <leader>rt8 :call RunThisTest("target", 3)<CR>
+nnoremap <unique> <leader>rt8 :call RunThisTest("target", 1)<CR>
 
 nnoremap <unique> <leader>rf1 :call OpenRequirements()<CR>
+
+nnoremap <unique> <leader>rjb :call OpenJenkins("fgapp")<CR>
+nnoremap <unique> <leader>rjv :call OpenJenkins("fgvariants")<CR>
+nnoremap <unique> <leader>rjm :call OpenJenkins("mergequeue")<CR>
+nnoremap <unique> <leader>rjt :call OpenJenkins("ttmaster")<CR>
+nnoremap <unique> <leader>rjT :call OpenJenkins("ttbranch")<CR>
+nnoremap <unique> <leader>rjl :call OpenJenkins("longwin32")<CR>
+nnoremap <unique> <leader>rjL :call OpenJenkins("longtarget")<CR>
 
 nnoremap <unique> <leader>rsc :call RunStyleCheck()<CR>
 nnoremap <unique> <leader>rk :call KeepThisTerminal()<CR>
