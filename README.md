@@ -1,7 +1,7 @@
 # dotfiles
 Configuration files used in my systems
 
-## Steps for cygwin
+## Steps for cygwin or Ubuntu
 
 1. Add the following lines to the ~/.bashrc
 
@@ -18,13 +18,13 @@ source /path/to/dotfiles/.bashrc.home1
 cp .tmux.conf ~
 ```
 
-1. Copy .minttyrc to ~
+1. Copy .minttyrc to ~ (Only for Cygwin)
 
 ```shell
 cp .minttyrc ~
 ```
 
-1. Restart cygwin
+1. Restart cygwin (Only for Cygwin)
 
 1. Clone Vundle for vim plugin management
 
@@ -35,8 +35,8 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 1. Create .vimrc at ~ with following content
 
 ```shell
-source /cygdrive/c/src/dotfiles/.vimrc.common.plugins
-source /cygdrive/c/src/dotfiles/.vimrc.common
+source /path/to/dotfiles/.vimrc.common.plugins
+source /path/to/dotfiles/.vimrc.common
 ```
 1. Install the vim plugins
 
